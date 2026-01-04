@@ -138,71 +138,174 @@
         <span class="brand-drop">DROP</span>
     </a>
     <a href="index.html" style="color: var(--text-secondary); font-size: 0.9rem;">
-        <i class="fas fa-arrow-left"></i> Volver al Inicio
+        <i class="fas fa-arrow-left"></i> <span data-i18n="backToHome">Volver al Inicio</span>
     </a>
 </header>
 
 <div class="container">
-    <h1>Política de Privacidad</h1>
-    <span class="last-updated">Última actualización: 31 de Diciembre de 2025</span>
+    <h1 data-i18n="privacyTitle">Política de Privacidad</h1>
+    <span class="last-updated" data-i18n-date="2025-12-31" data-i18n="lastUpdatedPrefix">Última actualización: 31 de Diciembre de 2025</span>
 
-    <p>
+    <p data-i18n="intro1">
         Gracias por jugar a <strong>Numbers Drop</strong>. Esta Política de Privacidad describe cómo nosotros ("el Desarrollador", "nosotros") manejamos la información cuando utilizas nuestra aplicación móvil.
     </p>
-    <p>
+    <p data-i18n="intro2">
         Respetamos tu privacidad y nos comprometemos a protegerla. Nuestra filosofía es simple: <strong>No recopilamos ni almacenamos datos personales identificables</strong> de nuestros usuarios.
     </p>
 
-    <h2>1. Recopilación de Datos</h2>
-    <p>
+    <h2 data-i18n="section1">1. Recopilación de Datos</h2>
+    <p data-i18n="section1p">
         Numbers Drop está diseñada para funcionar sin necesidad de que proporciones información personal.
     </p>
     <ul>
-        <li><strong>No requerimos registro:</strong> Puedes jugar sin crear una cuenta.</li>
-        <li><strong>No pedimos datos personales:</strong> No solicitamos tu nombre real, correo electrónico, dirección física ni número de teléfono.</li>
-        <li><strong>No accedemos a tus archivos:</strong> La aplicación no accede a tus fotos, contactos ni micrófono.</li>
+        <li><strong data-i18n="li1strong">No requerimos registro:</strong> <span data-i18n="li1">Puedes jugar sin crear una cuenta.</span></li>
+        <li><strong data-i18n="li2strong">No pedimos datos personales:</strong> <span data-i18n="li2">No solicitamos tu nombre real, correo electrónico, dirección física ni número de teléfono.</span></li>
+        <li><strong data-i18n="li3strong">No accedemos a tus archivos:</strong> <span data-i18n="li3">La aplicación no accede a tus fotos, contactos ni micrófono.</span></li>
     </ul>
-    <p>
+    <p data-i18n="section1p2">
         Cualquier dato del juego (como tus puntuaciones, configuración o nombre de jugador aleatorio) se almacenan asociados a un identificador generado en cada instalación. De ninguna manera se pueden relacionar estos datos con tu identidad real.
     </p>
 
-    <h2>2. Publicidad y Servicios de Terceros</h2>
-    <p>
+    <h2 data-i18n="section2">2. Publicidad y Servicios de Terceros</h2>
+    <p data-i18n="section2p1">
         Para mantener el juego gratuito, utilizamos servicios de publicidad de terceros proporcionados por <strong>Google AdMob</strong>.
     </p>
-    <p>
+    <p data-i18n="section2p2">
         Estos proveedores pueden recopilar y utilizar ciertos datos técnicos (como el ID de publicidad de tu dispositivo, dirección IP y datos de uso aproximados) para mostrar anuncios relevantes.
     </p>
-    <p>
+    <p data-i18n="section2p3">
         Puedes consultar cómo Google utiliza los datos cuando usas aplicaciones de sus socios aquí:
-        <a href="https://policies.google.com/technologies/partner-sites" target="_blank">Cómo utiliza Google la información</a>.
+        <a href="https://policies.google.com/technologies/partner-sites" target="_blank" data-i18n="googleLinkText">Cómo utiliza Google la información</a>.
     </p>
 
-    <h2>3. Privacidad de los Menores</h2>
-    <p>
+    <h2 data-i18n="section3">3. Privacidad de los Menores</h2>
+    <p data-i18n="section3p">
         Nuestros servicios no están dirigidos a niños menores de 13 años. No recopilamos a sabiendas información personal de niños menores de 13 años.
     </p>
 
-    <h2>4. Cambios en esta Política</h2>
-    <p>
+    <h2 data-i18n="section4">4. Cambios en esta Política</h2>
+    <p data-i18n="section4p">
         Podemos actualizar nuestra Política de Privacidad de vez en cuando. Te recomendamos revisar esta página periódicamente para ver si hay cambios.
     </p>
 
-    <h2>5. Contacto</h2>
-    <p>
+    <h2 data-i18n="section5">5. Contacto</h2>
+    <p data-i18n="section5p">
         Si tienes alguna pregunta o sugerencia sobre nuestra Política de Privacidad, no dudes en contactarnos.
     </p>
 
     <div class="contact-box">
         <i class="far fa-envelope" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 15px;"></i>
-        <p style="margin-bottom: 5px;">Correo electrónico de soporte:</p>
-        <a href="mailto:mfablab.dev@gmail.com" style="font-size: 1.2rem; font-weight: bold;">mfablab.dev@gmail.com</a>
+        <p style="margin-bottom: 5px;" data-i18n="supportEmailLabel">Correo electrónico de soporte:</p>
+        <a href="mailto:mfablab.dev@gmail.com" style="font-size: 1.2rem; font-weight: bold;" data-i18n="supportEmail">mfablab.dev@gmail.com</a>
     </div>
 </div>
 
-<footer>
+<footer data-i18n="footer">
     &copy; 2025 MFabLab. Todos los derechos reservados.
 </footer>
+
+<script>
+(function(){
+  // Prioridad de idioma:
+  // 1) ?lang=es|en en la URL (por ejemplo privacy-policy.html?lang=es)
+  // 2) navigator.language (si empieza por 'es' -> es, si no -> en)
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramLang = urlParams.get('lang');
+  let lang;
+
+  if (paramLang) {
+    const p = String(paramLang).toLowerCase().slice(0,2);
+    lang = p === 'es' ? 'es' : (p === 'en' ? 'en' : 'en');
+  } else {
+    const raw = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    const locale = raw.slice(0,2);
+    lang = locale === 'es' ? 'es' : 'en';
+  }
+
+  document.documentElement.lang = lang;
+
+  const msgs = {
+    es: {
+      privacyTitle: 'Política de Privacidad',
+      backToHome: '<i class="fas fa-arrow-left"></i> Volver al Inicio',
+      lastUpdatedPrefix: 'Última actualización:',
+      intro1: 'Gracias por jugar a <strong>Numbers Drop</strong>. Esta Política de Privacidad describe cómo nosotros ("el Desarrollador", "nosotros") manejamos la información cuando utilizas nuestra aplicación móvil.',
+      intro2: 'Respetamos tu privacidad y nos comprometemos a protegerla. Nuestra filosofía es simple: <strong>No recopilamos ni almacenamos datos personales identificables</strong> de nuestros usuarios.',
+      section1: '1. Recopilación de Datos',
+      section1p: 'Numbers Drop está diseñada para funcionar sin necesidad de que proporciones información personal.',
+      li1strong: 'No requerimos registro:', li1: 'Puedes jugar sin crear una cuenta.',
+      li2strong: 'No pedimos datos personales:', li2: 'No solicitamos tu nombre real, correo electrónico, dirección física ni número de teléfono.',
+      li3strong: 'No accedemos a tus archivos:', li3: 'La aplicación no accede a tus fotos, contactos ni micrófono.',
+      section1p2: 'Cualquier dato del juego (como tus puntuaciones, configuración o nombre de jugador aleatorio) se almacenan asociados a un identificador generado en cada instalación. De ninguna manera se pueden relacionar estos datos con tu identidad real.',
+      section2: '2. Publicidad y Servicios de Terceros',
+      section2p1: 'Para mantener el juego gratuito, utilizamos servicios de publicidad de terceros proporcionados por <strong>Google AdMob</strong>.',
+      section2p2: 'Estos proveedores pueden recopilar y utilizar ciertos datos técnicos (como el ID de publicidad de tu dispositivo, dirección IP y datos de uso aproximados) para mostrar anuncios relevantes.',
+      section2p3: 'Puedes consultar cómo Google utiliza los datos cuando usas aplicaciones de sus socios aquí:',
+      googleLinkText: 'Cómo utiliza Google la información',
+      section3: '3. Privacidad de los Menores',
+      section3p: 'Nuestros servicios no están dirigidos a niños menores de 13 años. No recopilamos a sabiendas información personal de niños menores de 13 años.',
+      section4: '4. Cambios en esta Política',
+      section4p: 'Podemos actualizar nuestra Política de Privacidad de vez en cuando. Te recomendamos revisar esta página periódicamente para ver si hay cambios.',
+      section5: '5. Contacto',
+      section5p: 'Si tienes alguna pregunta o sugerencia sobre nuestra Política de Privacidad, no dudes en contactarnos.',
+      supportEmailLabel: 'Correo electrónico de soporte:',
+      supportEmail: 'mfablab.dev@gmail.com',
+      footer: '&copy; 2025 MFabLab. Todos los derechos reservados.'
+    },
+    en: {
+      privacyTitle: 'Privacy Policy',
+      backToHome: '<i class="fas fa-arrow-left"></i> Back to Home',
+      lastUpdatedPrefix: 'Last updated:',
+      intro1: 'Thank you for playing <strong>Numbers Drop</strong>. This Privacy Policy describes how we (the "Developer", "we") handle information when you use our mobile app.',
+      intro2: 'We respect your privacy and are committed to protecting it. Our philosophy is simple: <strong>We do not collect or store personally identifiable information</strong> from our users.',
+      section1: '1. Data Collection',
+      section1p: 'Numbers Drop is designed to work without requiring you to provide personal information.',
+      li1strong: 'No registration required:', li1: 'You can play without creating an account.',
+      li2strong: 'No personal data requested:', li2: 'We do not ask for your real name, email, physical address or phone number.',
+      li3strong: 'No access to your files:', li3: 'The app does not access your photos, contacts or microphone.',
+      section1p2: 'Any game data (such as your scores, settings or random player name) is stored associated with an identifier generated on each installation. This data cannot be linked to your real identity.',
+      section2: '2. Advertising and Third-Party Services',
+      section2p1: 'To keep the game free, we use third-party advertising services provided by <strong>Google AdMob</strong>.',
+      section2p2: 'These providers may collect and use certain technical data (such as your device advertising ID, IP address and approximate usage data) to show relevant ads.',
+      section2p3: 'You can check how Google uses data when you use apps from their partners here:',
+      googleLinkText: 'How Google uses information',
+      section3: '3. Children\'s Privacy',
+      section3p: 'Our services are not directed to children under 13 years of age. We do not knowingly collect personal information from children under 13.',
+      section4: '4. Changes to this Policy',
+      section4p: 'We may update our Privacy Policy from time to time. We recommend you review this page periodically for changes.',
+      section5: '5. Contact',
+      section5p: 'If you have any questions or suggestions about our Privacy Policy, feel free to contact us.',
+      supportEmailLabel: 'Support email:',
+      supportEmail: 'mfablab.dev@gmail.com',
+      footer: '&copy; 2025 MFabLab. All rights reserved.'
+    }
+  };
+
+  // actualizar title si existe traducción
+  if (msgs[lang] && msgs[lang].privacyTitle) document.title = msgs[lang].privacyTitle + ' - Numbers Drop';
+
+  // reemplazar textos data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const text = msgs[lang] && msgs[lang][key];
+    if (!text) return;
+    // si el texto contiene etiquetas HTML, mantener innerHTML
+    if (text.includes('<')) el.innerHTML = text;
+    else el.textContent = text;
+  });
+
+  // formatear fechas marcadas con data-i18n-date (ISO yyyy-mm-dd)
+  document.querySelectorAll('[data-i18n-date]').forEach(el => {
+    const iso = el.getAttribute('data-i18n-date');
+    if (!iso) return;
+    const d = new Date(iso);
+    const formatted = d.toLocaleDateString(lang, { year:'numeric', month:'long', day:'numeric' });
+    const prefix = (msgs[lang] && msgs[lang].lastUpdatedPrefix) ? msgs[lang].lastUpdatedPrefix + ' ' : '';
+    el.textContent = prefix + formatted;
+  });
+
+})();
+</script>
 
 </body>
 </html>

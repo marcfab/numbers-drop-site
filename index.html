@@ -205,42 +205,40 @@
         <span class="brand-drop">DROP</span>
     </div>
 
-    <p>Entrena tu mente con el puzzle de combinación definitivo. Sin límites, solo estrategia.</p>
+    <p data-i18n="heroLead">Entrena tu mente con el puzzle de combinación definitivo.</p>
 
-    <a href="#" class="cta-button">
-        <i class="fab fa-google-play"></i> Descargar Ahora
-    </a>
+    <a href="#" class="cta-button" data-i18n="ctaButton"><i class="fab fa-google-play"></i> Descargar Ahora</a>
 
     <!-- Mockup Visual -->
     <div class="mockup-container">
         <div style="text-align: center; color: #444;">
             <i class="fas fa-cube" style="font-size: 4rem; margin-bottom: 20px;"></i>
-            <br>Game Screen
+            <br><span data-i18n="mockupLabel">Game Screen</span>
         </div>
     </div>
 </section>
 
 <!-- Features -->
 <section class="features">
-    <h2 class="section-title"><span>Cómo Funciona</span></h2>
+    <h2 class="section-title"><span data-i18n="sectionTitle">Cómo Funciona</span></h2>
     <div class="grid-features">
         <div class="feature-card">
             <!-- Icono actualizado a algo más "lógico" para sumar/unir -->
             <div class="feature-icon"><i class="fas fa-project-diagram"></i></div>
-            <h3>Combinación Estratégica</h3>
-            <p><strong>Une números idénticos o que sumen 10</strong> para despejar el tablero y disparar tu puntuación.</p>
+            <h3 data-i18n="feature1Title">Combinación Estratégica</h3>
+            <p data-i18n="feature1Desc"><strong>Une números idénticos o que sumen 10</strong> para despejar el tablero y disparar tu puntuación.</p>
         </div>
         <div class="feature-card">
             <!-- Icono de gravedad/caída -->
             <div class="feature-icon"><i class="fas fa-arrow-down"></i></div>
-            <h3>Reacción en Cadena</h3>
-            <p>Aprovecha la gravedad. Al eliminar bloques, los superiores caen para llenar los huecos, creando <strong>nuevos combos en cascada</strong>.</p>
+            <h3 data-i18n="feature2Title">Aprovecha la gravedad</h3>
+            <p data-i18n="feature2Desc">Al eliminar bloques, los superiores caen para llenar los huecos, creando <strong>nuevas combinaciones</strong>.</p>
         </div>
         <div class="feature-card">
             <!-- Icono de trofeo/ranking -->
             <div class="feature-icon"><i class="fas fa-trophy"></i></div>
-            <h3>Desafío Diario</h3>
-            <p>Un nuevo reto cada 24 horas. Escala posiciones en la <strong>clasificación global</strong> y demuestra tu agilidad mental al mundo.</p>
+            <h3 data-i18n="feature3Title">Desafío Diario</h3>
+            <p data-i18n="feature3Desc">Un nuevo reto cada 24 horas. Escala posiciones en la <strong>clasificación global</strong> y demuestra tu agilidad mental al mundo.</p>
         </div>
     </div>
 </section>
@@ -255,18 +253,89 @@
             </div>
         </div>
         <div class="footer-col">
-            <h4>Legal</h4>
-            <a href="privacy-policy.html">Política de Privacidad</a>
+            <h4 data-i18n="footerLegal">Legal</h4>
+            <a href="privacy-policy.html" data-i18n="privacyLink">Política de Privacidad</a>
         </div>
         <div class="footer-col">
-            <h4>Contacto</h4>
-            <a href="mailto:mfablab.dev@gmail.com">mfablab.dev@gmail.com</a>
+            <h4 data-i18n="footerContactTitle">Contacto</h4>
+            <a href="mailto:mfablab.dev@gmail.com" data-i18n="footerContactEmail">mfablab.dev@gmail.com</a>
         </div>
     </div>
-    <div class="copyright">
+    <div class="copyright" data-i18n="footerCopyright">
         &copy; 2025 MFabLab. Todos los derechos reservados.
     </div>
 </footer>
+
+<script>
+(function(){
+  // Prioridad: ?lang=es|en en URL -> navigator.language
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramLang = urlParams.get('lang');
+  let lang;
+
+  if (paramLang) {
+    const p = String(paramLang).toLowerCase().slice(0,2);
+    lang = p === 'es' ? 'es' : (p === 'en' ? 'en' : 'en');
+  } else {
+    const raw = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    const locale = raw.slice(0,2);
+    lang = locale === 'es' ? 'es' : 'en';
+  }
+
+  document.documentElement.lang = lang;
+
+  const msgs = {
+    es: {
+      title: 'Numbers Drop - El Juego de Puzzle Definitivo',
+      heroLead: 'Entrena tu mente con el puzzle de combinación definitivo.',
+      ctaButton: '<i class="fab fa-google-play"></i> Descargar Ahora',
+      mockupLabel: 'Pantalla del Juego',
+      sectionTitle: 'Cómo Funciona',
+      feature1Title: 'Combinación Estratégica',
+      feature1Desc: '<strong>Une números idénticos o que sumen 10</strong> para despejar el tablero y disparar tu puntuación.',
+      feature2Title: 'Aprovecha la gravedad',
+      feature2Desc: 'Al eliminar bloques, los superiores caen para llenar los huecos, creando <strong>nuevas combinaciones</strong>.',
+      feature3Title: 'Desafío Diario',
+      feature3Desc: 'Un nuevo reto cada 24 horas. Escala posiciones en la <strong>clasificación global</strong> y demuestra tu agilidad mental al mundo.',
+      footerLegal: 'Legal',
+      privacyLink: 'Política de Privacidad',
+      footerContactTitle: 'Contacto',
+      footerContactEmail: 'mfablab.dev@gmail.com',
+      footerCopyright: '&copy; 2025 MFabLab. Todos los derechos reservados.'
+    },
+    en: {
+      title: 'Numbers Drop - The Ultimate Puzzle Game',
+      heroLead: 'Train your mind with the ultimate number-combining puzzle.',
+      ctaButton: '<i class="fab fa-google-play"></i> Download Now',
+      mockupLabel: 'Game Screen',
+      sectionTitle: 'How it Works',
+      feature1Title: 'Strategic Combining',
+      feature1Desc: '<strong>Combine identical numbers or those that add up to 10</strong> to clear the board and boost your score.',
+      feature2Title: 'Use Gravity',
+      feature2Desc: 'When blocks are removed, upper blocks fall to fill gaps, creating <strong>new combos</strong>.',
+      feature3Title: 'Daily Challenge',
+      feature3Desc: 'A new challenge every 24 hours. Climb the <strong>global leaderboard</strong> and show off your skills.',
+      footerLegal: 'Legal',
+      privacyLink: 'Privacy Policy',
+      footerContactTitle: 'Contact',
+      footerContactEmail: 'mfablab.dev@gmail.com',
+      footerCopyright: '&copy; 2025 MFabLab. All rights reserved.'
+    }
+  };
+
+  // actualizar title
+  if (msgs[lang] && msgs[lang].title) document.title = msgs[lang].title;
+
+  // reemplazar textos data-i18n
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const text = msgs[lang] && msgs[lang][key];
+    if (!text) return;
+    if (text.includes('<')) el.innerHTML = text; else el.textContent = text;
+  });
+
+})();
+</script>
 
 </body>
 </html>
