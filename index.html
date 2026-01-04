@@ -1,15 +1,272 @@
+<!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <title>Numbers Drop Site</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Numbers Drop - El Juego de Puzzle Definitivo</title>
+    <meta name="description" content="Numbers Drop: Combina números, despeja el tablero y desafía a tu mente.">
 
+    <!-- Google Fonts: Importamos pesos 300 (Light) y 900 (Black) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --surface-color: #1e1e1e;
+            --accent-color: #00E5FF; /* Tu NeonCyan */
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1a1;
+            --glow-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        /* --- ESTILOS DEL TÍTULO (Imitando GameTitle2) --- */
+        .brand-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1; /* Pegar las líneas verticalmente */
+            user-select: none;
+        }
+
+        .brand-numbers {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900; /* FontWeight.Black */
+            font-size: 4rem;  /* Ajustado para web */
+            letter-spacing: 2px; /* letterSpacing = 2.sp */
+
+            /* Degradado de Blanco a Gris Plata (#B0B0B0) */
+            background: linear-gradient(180deg, #FFFFFF 20%, #B0B0B0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            /* Sombra suave difuminada (Shadow en Compose) */
+            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.5));
+        }
+
+        .brand-drop {
+            font-family: 'Inter', sans-serif;
+            font-weight: 300; /* FontWeight.Light */
+            font-size: 2.5rem; /* Proporcional a Numbers */
+            letter-spacing: 12px; /* letterSpacing = 8.sp (exagerado para web) */
+            color: #ffffff;
+            margin-top: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Versión pequeña para el Header */
+        .brand-mini .brand-numbers { font-size: 1.5rem; }
+        .brand-mini .brand-drop { font-size: 0.9rem; letter-spacing: 4px; margin-top: 0; }
+
+        /* --- Header --- */
+        header {
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            background: rgba(13, 13, 13, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 70%);
+        }
+
+        .hero p {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            background-color: var(--accent-color);
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 16px; /* RoundedCornerShape(16.dp) */
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: var(--glow-shadow);
+            border: 1px solid rgba(255,255,255,0.3); /* Simula tu borde de luz */
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px var(--accent-color);
+        }
+
+        /* --- Mockup --- */
+        .mockup-container {
+            margin-top: 50px;
+            width: 280px;
+            height: 560px;
+            background: #000;
+            border-radius: 35px;
+            border: 6px solid #333;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- Features --- */
+        .features { padding: 100px 10%; background: var(--bg-color); }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; color: white; }
+        .section-title span { border-bottom: 3px solid var(--accent-color); }
+
+        .grid-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--surface-color);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+        }
+        .feature-card:hover { border-color: var(--accent-color); }
+
+        .feature-icon { font-size: 2rem; color: var(--accent-color); margin-bottom: 20px; }
+        .feature-card h3 { margin-bottom: 10px; color: white; }
+        .feature-card p { color: var(--text-secondary); }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #050505;
+            padding: 60px 10% 20px;
+            border-top: 1px solid #222;
+        }
+        .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; }
+        .footer-col h4 { color: white; margin-bottom: 20px; }
+        .footer-col a { display: block; color: var(--text-secondary); margin-bottom: 10px; }
+        .footer-col a:hover { color: var(--accent-color); }
+        .copyright { text-align: center; color: #555; font-size: 0.8rem; margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .brand-numbers { font-size: 3rem; }
+            .brand-drop { font-size: 1.8rem; letter-spacing: 8px; }
+        }
+    </style>
+</head>
 <body>
 
-    <h1>Bienvenido a Numbers Drop</h1>
-    <p>This is a simple HTML page.</p>
+<!-- Header -->
+<header>
+    <!-- Logo versión mini para la barra -->
+    <div class="brand-container brand-mini">
+        <span class="brand-numbers">Numbers</span>
+        <span class="brand-drop">DROP</span>
+    </div>
+
+    <!-- Redes o contacto rápido -->
+    <a href="mailto:mfablab.dev@gmail.com" style="color:var(--text-secondary);"><i class="far fa-envelope"></i></a>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+
+    <!-- EL TÍTULO EXACTO DE TU APP (GameTitle2) -->
+    <div class="brand-container">
+        <span class="brand-numbers">Numbers</span>
+        <span class="brand-drop">DROP</span>
+    </div>
+
+    <p>Entrena tu mente con el puzzle de combinación definitivo. Sin límites, solo estrategia.</p>
+
+    <a href="#" class="cta-button">
+        <i class="fab fa-google-play"></i> Descargar Ahora
+    </a>
+
+    <!-- Mockup Visual -->
+    <div class="mockup-container">
+        <div style="text-align: center; color: #444;">
+            <i class="fas fa-cube" style="font-size: 4rem; margin-bottom: 20px;"></i>
+            <br>Game Screen
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="features">
+    <h2 class="section-title"><span>Cómo Funciona</span></h2>
+    <div class="grid-features">
+        <div class="feature-card">
+            <!-- Icono actualizado a algo más "lógico" para sumar/unir -->
+            <div class="feature-icon"><i class="fas fa-project-diagram"></i></div>
+            <h3>Combinación Estratégica</h3>
+            <p><strong>Une números idénticos o que sumen 10</strong> para despejar el tablero y disparar tu puntuación.</p>
+        </div>
+        <div class="feature-card">
+            <!-- Icono de gravedad/caída -->
+            <div class="feature-icon"><i class="fas fa-arrow-down"></i></div>
+            <h3>Reacción en Cadena</h3>
+            <p>Aprovecha la gravedad. Al eliminar bloques, los superiores caen para llenar los huecos, creando <strong>nuevos combos en cascada</strong>.</p>
+        </div>
+        <div class="feature-card">
+            <!-- Icono de trofeo/ranking -->
+            <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+            <h3>Desafío Diario</h3>
+            <p>Un nuevo reto cada 24 horas. Escala posiciones en la <strong>clasificación global</strong> y demuestra tu agilidad mental al mundo.</p>
+        </div>
+    </div>
+</section>
+
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-col">
+            <div class="brand-container brand-mini" style="align-items: flex-start;">
+                <span class="brand-numbers">Numbers</span>
+                <span class="brand-drop">DROP</span>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Legal</h4>
+            <a href="privacy-policy.html">Política de Privacidad</a>
+        </div>
+        <div class="footer-col">
+            <h4>Contacto</h4>
+            <a href="mailto:mfablab.dev@gmail.com">mfablab.dev@gmail.com</a>
+        </div>
+    </div>
+    <div class="copyright">
+        &copy; 2025 MFabLab. Todos los derechos reservados.
+    </div>
+</footer>
 
 </body>
-
-
 </html>
